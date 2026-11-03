@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Familia del Sabor – Comida criolla tradicional con calidez hogareña. Delivery en Breña, Lince, La Victoria y Pueblo Libre. Catering y Eventos. MilyTejas: chocotejas artesanales." />
+  <meta name="keywords" content="comida criolla, delivery, Lima, catering, chocotejas, ají de gallina, pachamanca, cordon bleu" />
+  <title>La Familia del Sabor | Comida Criolla Tradicional</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            lila:    { DEFAULT: '#E8DEFF', light: '#F4EFFF', dark: '#C4AFF0' },
+            morado:  { DEFAULT: '#6B35A8', dark: '#4A2275', light: '#9B6AD4' },
+            rosa:    { DEFAULT: '#D6457A', light: '#F0A0BF', pale: '#FDE8F1' },
+            crema:   '#FBF7F0',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: #FBF7F0; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* Navbar scroll effect */
+    #navbar { transition: background 0.3s, box-shadow 0.3s; }
+    #navbar.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 2px 20px rgba(107,53,168,0.12); }
+
+    /* Mobile menu */
+    #mobile-menu { transition: max-height 0.35s ease, opacity 0.35s ease; overflow: hidden; max-height: 0; opacity: 0; }
+    #mobile-menu.open { max-height: 500px; opacity: 1; }
+
+    /* Card hover */
+    .food-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .food-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(107,53,168,0.18); }
+
+    /* Button microinteraction */
+    .btn-primary { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .btn-primary:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(107,53,168,0.3); }
+
+    /* WhatsApp floating button */
+    #whatsapp-float { animation: pulse 2.5s infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      50%       { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+    }
+
+    /* Lightbox */
+    #lightbox { transition: opacity 0.3s; }
+
+    /* Hero gradient */
+    .hero-gradient {
+      background: linear-gradient(135deg, #6B35A8 0%, #9B6AD4 40%, #D6457A 100%);
+    }
+
+    /* Section alternating bg */
+    .bg-lila-soft { background-color: #F4EFFF; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Tejas card */
+    .teja-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .teja-card:hover { transform: scale(1.05); box-shadow: 0 12px 32px rgba(214,69,122,0.2); }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm" aria-label="Navegación principal">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-full hero-gradient flex items-center justify-center shadow">
+          <span class="text-white text-lg font-bold font-display">FS</span>
+        </div>
+        <span class="font-display font-bold text-morado text-lg leading-tight hidden sm:block">
+          La Familia<br><span class="text-rosa text-sm font-semibold">del Sabor</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <li><a href="#inicio"   class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">Inicio</a></li>
+        <li><a href="#menu"     class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">Platos Criollos</a></li>
+        <li><a href="#catering" class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">Catering & Eventos</a></li>
+        <li><a href="#milytejas"class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">MilyTejas</a></li>
+        <li><a href="#cobertura"class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">Cobertura</a></li>
+        <li><a href="#contacto" class="px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition">Contacto</a></li>
+      </ul>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/51934587734?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20La%20Familia%20del%20Sabor"
+           target="_blank" rel="noopener"
+           class="btn-primary hidden sm:flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-sm font-semibold px-4 py-2 rounded-full shadow">
+          <i class="fab fa-whatsapp text-base"></i> Pide por WhatsApp
+        </a>
+        <button id="menu-toggle" aria-label="Abrir menú" class="md:hidden p-2 rounded-lg hover:bg-lila transition">
+          <i class="fas fa-bars text-morado text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden bg-white border-t border-lila-dark/20 px-4">
+      <ul class="py-3 flex flex-col gap-1 text-sm font-medium">
+        <li><a href="#inicio"    class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">Inicio</a></li>
+        <li><a href="#menu"      class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">Platos Criollos</a></li>
+        <li><a href="#catering"  class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">Catering & Eventos</a></li>
+        <li><a href="#milytejas" class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">MilyTejas</a></li>
+        <li><a href="#cobertura" class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">Cobertura</a></li>
+        <li><a href="#contacto"  class="block px-3 py-2 rounded-lg hover:bg-lila hover:text-morado transition" onclick="closeMenu()">Contacto</a></li>
+        <li class="pt-1">
+          <a href="https://wa.me/51934587734?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20La%20Familia%20del%20Sabor"
+             target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold px-4 py-3 rounded-full shadow">
+            <i class="fab fa-whatsapp"></i> Pide por WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="inicio" class="relative min-h-screen flex items-center hero-gradient overflow-hidden pt-16">
+
+    <!-- Decorative circles -->
+    <div class="absolute -top-20 -left-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-rosa-light/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 right-1/4 w-40 h-40 bg-lila/20 rounded-full blur-2xl"></div>
+
+    <div class="max-w-6xl mx-auto px-4 py-20 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Text -->
+      <div class="text-white text-center md:text-left">
+        <p class="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4 backdrop-blur-sm">
+          🍽️ Delivery en Lima · Lunes a Domingo
+        </p>
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
+          El sabor criollo<br>
+          <span class="text-yellow-200">tradicional</span><br>
+          directo a tu mesa
+        </h1>
+        <p class="text-white/85 text-lg mb-8 leading-relaxed">
+          Sazón casera, ingredientes frescos y entrega rápida en Breña, Lince, La Victoria y Pueblo Libre. Como lo hacía la abuela, pero en tu puerta.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <a href="https://wa.me/51934587734?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20La%20Familia%20del%20Sabor"
+             target="_blank" rel="noopener"
+             class="btn-primary flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-full text-lg shadow-xl">
+            <i class="fab fa-whatsapp text-2xl"></i> Hacer mi pedido ahora
+          </a>
+          <a href="#menu"
+             class="btn-primary flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-semibold px-6 py-4 rounded-full backdrop-blur-sm border border-white/30">
+            <i class="fas fa-utensils"></i> Ver el menú
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-10 flex gap-8 justify-center md:justify-start">
+          <div class="text-center">
+            <p class="font-display text-3xl font-bold text-yellow-200">500+</p>
+            <p class="text-white/70 text-sm">Pedidos mensuales</p>
+          </div>
+          <div class="text-center">
+            <p class="font-display text-3xl font-bold text-yellow-200">4.9★</p>
+            <p class="text-white/70 text-sm">Valoración clientes</p>
+          </div>
+          <div class="text-center">
+            <p class="font-display text-3xl font-bold text-yellow-200">45'</p>
+            <p class="text-white/70 text-sm">Entrega promedio</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero image placeholder / emoji art -->
+      <div class="flex justify-center">
+        <div class="relative w-72 h-72 md:w-80 md:h-80">
+          <div class="w-full h-full rounded-full bg-white/15 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-9xl shadow-2xl">
+            🍲
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 bg-white rounded-2xl px-3 py-2 shadow-lg text-center">
+            <p class="text-2xl">🌿</p>
+            <p class="text-xs font-bold text-morado">100% Fresco</p>
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-yellow-50 rounded-2xl px-3 py-2 shadow-lg text-center">
+            <p class="text-2xl">🚀</p>
+            <p class="text-xs font-bold text-morado">Entrega Rápida</p>
+          </div>
+          <div class="absolute top-1/2 -right-8 bg-rosa/10 border border-rosa/30 rounded-2xl px-3 py-2 shadow text-center">
+            <p class="text-2xl">❤️</p>
+            <p class="text-xs font-bold text-rosa">Sazón Casera</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FBF7F0"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PLATOS CRIOLLOS
+  ============================================================ -->
+  <section id="menu" class="py-20 bg-crema">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-morado font-semibold text-sm uppercase tracking-widest mb-2">Nuestra Carta</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mb-4">Platos Bandera y Menú Criollo</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Cada plato preparado con sazón tradicional, ingredientes frescos del mercado y mucho amor familiar.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-2 justify-center mb-10 reveal">
+        <button onclick="filterMenu('all')"      class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold border-2 border-morado bg-morado text-white transition" data-filter="all">Todos</button>
+        <button onclick="filterMenu('principal')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border-2 border-morado text-morado hover:bg-morado hover:text-white transition" data-filter="principal">Platos de Fondo</button>
+        <button onclick="filterMenu('entrada')"  class="filter-btn px-5 py-2 rounded-full text-sm font-semibold border-2 border-morado text-morado hover:bg-morado hover:text-white transition" data-filter="entrada">Entradas</button>
+      </div>
+
+      <!-- Menu cards grid -->
+      <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Pollo al horno -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="principal">
+          <div class="h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🍗', 'Pollo al Horno con Ensalada Rusa')">
+            🍗
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Pollo al Horno</h3>
+            <p class="text-gray-500 text-sm mb-2">con Ensalada Rusa</p>
+            <p class="text-gray-600 text-sm mb-4">Jugoso pollo horneado con especias criollas, acompañado de ensalada rusa cremosa.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Pollo%20al%20Horno%20con%20Ensalada%20Rusa"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pachamanca -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="principal">
+          <div class="h-48 bg-gradient-to-br from-amber-100 to-yellow-50 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🫕', 'Pachamanca a la Olla')">
+            🫕
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Pachamanca a la Olla</h3>
+            <p class="text-gray-500 text-sm mb-2">de Pollo y Chancho</p>
+            <p class="text-gray-600 text-sm mb-4">Auténtica pachamanca elaborada con hierbas andinas, chicha de jora y las mejores carnes.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Pachamanca%20a%20la%20Olla"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cordon Bleu -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="principal">
+          <div class="h-48 bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🥩', 'Cordon Bleu con Salsa de Champiñones')">
+            🥩
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Cordon Bleu</h3>
+            <p class="text-gray-500 text-sm mb-2">con Salsa de Champiñones</p>
+            <p class="text-gray-600 text-sm mb-4">Pechuga rellena de jamón y queso, empanizada y bañada en cremosa salsa de champiñones.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Cordon%20Bleu%20con%20Salsa%20de%20Champi%C3%B1ones"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ají de Gallina -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="principal">
+          <div class="h-48 bg-gradient-to-br from-yellow-100 to-amber-100 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🍛', 'Ají de Gallina')">
+            🍛
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Ají de Gallina</h3>
+            <p class="text-gray-500 text-sm mb-2">Tradicional limeño</p>
+            <p class="text-gray-600 text-sm mb-4">El clásico criollo: pollo deshilachado en salsa de ají amarillo, leche y nueces. Irresistible.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Aj%C3%AD%20de%20Gallina"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tamalito verde -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="entrada">
+          <div class="h-48 bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🌿', 'Tamalito Verde')">
+            🌿
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Tamalito Verde</h3>
+            <p class="text-gray-500 text-sm mb-2">Entrada criolla</p>
+            <p class="text-gray-600 text-sm mb-4">Suave tamalito de maíz con hierbas y ají verde, envuelto en hoja de plátano. Sabor a tradición.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Tamalito%20Verde"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tequeños criollos -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="entrada">
+          <div class="h-48 bg-gradient-to-br from-yellow-50 to-amber-50 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🧀', 'Tequeños Criollos')">
+            🧀
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Tequeños Criollos</h3>
+            <p class="text-gray-500 text-sm mb-2">con queso fundido</p>
+            <p class="text-gray-600 text-sm mb-4">Crujientes por fuera, cremosos por dentro. El aperitivo favorito de toda reunión criolla.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Tequenos%20Criollos"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Choclo con queso -->
+        <article class="food-card menu-item reveal bg-white rounded-2xl overflow-hidden shadow-md" data-category="entrada">
+          <div class="h-48 bg-gradient-to-br from-yellow-100 to-lime-50 flex items-center justify-center text-7xl cursor-pointer"
+               onclick="openLightbox('🌽', 'Choclo con Queso')">
+            🌽
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Choclo con Queso</h3>
+            <p class="text-gray-500 text-sm mb-2">Entrada fresca</p>
+            <p class="text-gray-600 text-sm mb-4">Choclo tierno cocido al punto, servido con queso fresco. Sencillo, nutritivo y delicioso.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-morado text-lg">Consultar precio</span>
+              <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20Choclo%20con%20Queso"
+                 target="_blank" rel="noopener"
+                 class="btn-primary flex items-center gap-1 bg-[#25D366] text-white text-xs font-bold px-3 py-2 rounded-full">
+                <i class="fab fa-whatsapp"></i> Pedir
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /menu-grid -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MILITEJAS
+  ============================================================ -->
+  <section id="milytejas" class="py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #FDE8F1 0%, #F4EFFF 50%, #EDE0FF 100%);">
+
+    <!-- Decorative -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-rosa/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-morado/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-rosa/20 text-rosa font-bold px-5 py-2 rounded-full mb-4 text-sm">
+          <span>🍫</span> Sub-marca exclusiva
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <span class="text-morado">Mily</span><span class="text-rosa">Tejas</span>
+        </h2>
+        <p class="text-gray-600 max-w-xl mx-auto text-lg">Chocotejas artesanales hechas con amor, para regalar o para darte ese antojo merecido.</p>
+      </div>
+
+      <!-- Chocotejas grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+        <!-- Manjar Blanco -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">🤎</div>
+          <p class="font-semibold text-sm text-gray-700">Manjar Blanco</p>
+          <p class="text-gray-400 text-xs mt-1">Tradicional</p>
+        </div>
+        <!-- Pecana -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">🌰</div>
+          <p class="font-semibold text-sm text-gray-700">Pecana</p>
+          <p class="text-gray-400 text-xs mt-1">Crocante</p>
+        </div>
+        <!-- Pasas Borrachas -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">🍇</div>
+          <p class="font-semibold text-sm text-gray-700">Pasas Borrachas</p>
+          <p class="text-gray-400 text-xs mt-1">Especial</p>
+        </div>
+        <!-- Lúcuma -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">🟡</div>
+          <p class="font-semibold text-sm text-gray-700">Lúcuma</p>
+          <p class="text-gray-400 text-xs mt-1">Sabor peruano</p>
+        </div>
+        <!-- Maracuyá -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">🔶</div>
+          <p class="font-semibold text-sm text-gray-700">Maracuyá</p>
+          <p class="text-gray-400 text-xs mt-1">Afrutado</p>
+        </div>
+        <!-- Café -->
+        <div class="teja-card reveal bg-white rounded-2xl p-4 text-center shadow-md">
+          <div class="text-4xl mb-2">☕</div>
+          <p class="font-semibold text-sm text-gray-700">Café</p>
+          <p class="text-gray-400 text-xs mt-1">Intenso</p>
+        </div>
+      </div>
+
+      <!-- CTA box -->
+      <div class="reveal bg-white rounded-3xl shadow-xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 max-w-3xl mx-auto">
+        <div class="text-6xl">🎁</div>
+        <div class="text-center md:text-left flex-1">
+          <h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Pide tu caja o docena</h3>
+          <p class="text-gray-500 mb-4">Perfectas para regalar o para ese antojo irresistible. Cajas personalizadas para empresas, cumpleaños y celebraciones.</p>
+          <a href="https://wa.me/51934587734?text=Hola,%20quiero%20pedir%20MilyTejas"
+             target="_blank" rel="noopener"
+             class="btn-primary inline-flex items-center gap-2 bg-rosa text-white font-bold px-6 py-3 rounded-full shadow">
+            <i class="fab fa-whatsapp text-lg"></i> Pedir MilyTejas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CATERING & EVENTOS
+  ============================================================ -->
+  <section id="catering" class="py-20 bg-crema">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Left: info -->
+        <div class="reveal">
+          <p class="text-morado font-semibold text-sm uppercase tracking-widest mb-2">Servicio Profesional</p>
+          <h2 class="font-display text-4xl font-bold text-gray-800 mb-4">Catering & Eventos Corporativos</h2>
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            Llevamos el sabor criollo a tu empresa, celebración o evento masivo. Atención personalizada, menú a medida y puntualidad garantizada.
+          </p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="mt-1 w-6 h-6 rounded-full bg-morado/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-check text-morado text-xs"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Integraciones de empresa</p>
+                <p class="text-gray-500 text-sm">Menús especiales para team building y reuniones corporativas.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="mt-1 w-6 h-6 rounded-full bg-morado/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-check text-morado text-xs"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Aniversarios y celebraciones</p>
+                <p class="text-gray-500 text-sm">Banquetes criollos para fechas importantes de tu empresa.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="mt-1 w-6 h-6 rounded-full bg-morado/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-check text-morado text-xs"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Eventos masivos</p>
+                <p class="text-gray-500 text-sm">Capacidad para grupos grandes con logística completa de servicio.</p>
+              </div>
+            </li>
+          </ul>
+          <a href="https://wa.me/51934587734?text=Hola,%20quiero%20cotizar%20un%20servicio%20de%20Catering"
+             target="_blank" rel="noopener"
+             class="btn-primary inline-flex items-center gap-2 bg-morado text-white font-bold px-6 py-3 rounded-full shadow-lg">
+            <i class="fab fa-whatsapp"></i> Solicitar cotización
+          </a>
+        </div>
+
+        <!-- Right: form -->
+        <div class="reveal bg-white rounded-3xl shadow-xl p-8">
+          <h3 class="font-display text-2xl font-bold text-gray-800 mb-6">Solicita tu cotización</h3>
+          <form id="catering-form" class="space-y-4" onsubmit="submitCatering(event)">
+            <div>
+              <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-morado/30 focus:border-morado transition" />
+            </div>
+            <div>
+              <label for="empresa" class="block text-sm font-medium text-gray-700 mb-1">Empresa / Organización</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-morado/30 focus:border-morado transition" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="personas" class="block text-sm font-medium text-gray-700 mb-1">N° de personas *</label>
+                <input type="number" id="personas" name="personas" required min="10" placeholder="50"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-morado/30 focus:border-morado transition" />
+              </div>
+              <div>
+                <label for="fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha del evento *</label>
+                <input type="date" id="fecha" name="fecha" required
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-morado/30 focus:border-morado transition" />
+              </div>
+            </div>
+            <div>
+              <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Detalles del evento</label>
+              <textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos sobre tu evento, tipo de menú preferido, etc."
+                        class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-morado/30 focus:border-morado transition resize-none"></textarea>
+            </div>
+            <button type="submit"
+                    class="btn-primary w-full bg-morado hover:bg-morado-dark text-white font-bold py-3 rounded-xl shadow-lg">
+              <i class="fas fa-paper-plane mr-2"></i> Enviar solicitud por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COBERTURA
+  ============================================================ -->
+  <section id="cobertura" class="py-20 bg-lila-soft">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-morado font-semibold text-sm uppercase tracking-widest mb-2">Zona de Reparto</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mb-4">¿Llegamos a tu zona?</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Delivery en los mejores distritos de Lima. Pedidos mínimos aplican según zona.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+
+        <!-- Zones cards -->
+        <div class="reveal">
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <!-- Breña -->
+            <div class="bg-white rounded-2xl p-5 shadow-md flex flex-col items-center text-center food-card">
+              <div class="w-12 h-12 rounded-full bg-morado/10 flex items-center justify-center mb-3">
+                <i class="fas fa-map-marker-alt text-morado text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-1">Breña</h3>
+              <p class="text-gray-500 text-xs">Delivery disponible todos los días</p>
+            </div>
+            <!-- Lince -->
+            <div class="bg-white rounded-2xl p-5 shadow-md flex flex-col items-center text-center food-card">
+              <div class="w-12 h-12 rounded-full bg-rosa/10 flex items-center justify-center mb-3">
+                <i class="fas fa-map-marker-alt text-rosa text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-1">Lince</h3>
+              <p class="text-gray-500 text-xs">Delivery disponible todos los días</p>
+            </div>
+            <!-- La Victoria -->
+            <div class="bg-white rounded-2xl p-5 shadow-md flex flex-col items-center text-center food-card">
+              <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-3">
+                <i class="fas fa-map-marker-alt text-yellow-600 text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-1">La Victoria</h3>
+              <p class="text-gray-500 text-xs">Delivery disponible todos los días</p>
+            </div>
+            <!-- Pueblo Libre -->
+            <div class="bg-white rounded-2xl p-5 shadow-md flex flex-col items-center text-center food-card">
+              <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                <i class="fas fa-map-marker-alt text-green-600 text-xl"></i>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-1">Pueblo Libre</h3>
+              <p class="text-gray-500 text-xs">Delivery disponible todos los días</p>
+            </div>
+          </div>
+
+          <!-- Horarios -->
+          <div class="bg-white rounded-2xl p-6 shadow-md">
+            <h3 class="font-display text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <i class="fas fa-clock text-morado"></i> Horarios de atención
+            </h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                <span class="font-medium text-gray-700">Lunes – Viernes</span>
+                <span class="text-morado font-semibold">11:00 am – 8:00 pm</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                <span class="font-medium text-gray-700">Sábados</span>
+                <span class="text-morado font-semibold">10:00 am – 9:00 pm</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="font-medium text-gray-700">Domingos</span>
+                <span class="text-morado font-semibold">10:00 am – 6:00 pm</span>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center gap-2 bg-green-50 text-green-700 rounded-xl px-4 py-3 text-sm font-medium">
+              <i class="fas fa-motorcycle"></i>
+              <span>Tiempo estimado de entrega: <strong>30 – 60 minutos</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="reveal rounded-2xl overflow-hidden shadow-xl" style="height: 420px;">
+          <iframe
+            title="Zona de cobertura - La Familia del Sabor"
+            width="100%"
+            height="100%"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15601.46940027017!2d-77.04382!3d-12.07164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2spe!4v1699999999999!5m2!1ses!2spe"
+            style="border:0;"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIOS
+  ============================================================ -->
+  <section class="py-20 bg-crema">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-14 reveal">
+        <p class="text-rosa font-semibold text-sm uppercase tracking-widest mb-2">Lo que dicen nuestros clientes</p>
+        <h2 class="font-display text-4xl font-bold text-gray-800">¿Por qué eligen La Familia?</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal bg-white rounded-2xl p-6 shadow-md food-card">
+          <div class="flex gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">"El ají de gallina es exactamente como el de mi abuela. Llevo 3 meses pidiendo cada semana. ¡No cambia!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-morado/20 flex items-center justify-center font-bold text-morado">M</div>
+            <div>
+              <p class="font-semibold text-sm text-gray-800">María Huanca</p>
+              <p class="text-xs text-gray-400">Breña, Lima</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal bg-white rounded-2xl p-6 shadow-md food-card">
+          <div class="flex gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">"Pedimos catering para 80 personas en nuestra integración. Todo perfecto, puntual y riquísimo. Los volvemos a contratar."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-rosa/20 flex items-center justify-center font-bold text-rosa">C</div>
+            <div>
+              <p class="font-semibold text-sm text-gray-800">Carlos Ríos</p>
+              <p class="text-xs text-gray-400">RRHH – Empresa del sector retail</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal bg-white rounded-2xl p-6 shadow-md food-card">
+          <div class="flex gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">"Las MilyTejas de lúcuma son una locura. Las regalé en Navidad y todos me preguntaron dónde las compré."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-yellow-200 flex items-center justify-center font-bold text-yellow-700">A</div>
+            <div>
+              <p class="font-semibold text-sm text-gray-800">Ana Torres</p>
+              <p class="text-xs text-gray-400">Pueblo Libre, Lima</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACTO
+  ============================================================ -->
+  <section id="contacto" class="py-20" style="background: linear-gradient(135deg, #6B35A8 0%, #9B6AD4 100%);">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <div class="reveal">
+        <p class="text-white/70 font-semibold text-sm uppercase tracking-widest mb-3">Contáctanos</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">¿Listo para ordenar?</h2>
+        <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto">Un solo mensaje y nos encargamos de todo. Escríbenos y recibe tu pedido en casa.</p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a href="https://wa.me/51934587734?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20La%20Familia%20del%20Sabor"
+             target="_blank" rel="noopener"
+             class="btn-primary flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-full text-lg shadow-xl">
+            <i class="fab fa-whatsapp text-2xl"></i> +51 934 587 734
+          </a>
+          <a href="tel:+51934587734"
+             class="btn-primary flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-semibold px-6 py-4 rounded-full backdrop-blur-sm border border-white/30">
+            <i class="fas fa-phone"></i> Llamar ahora
+          </a>
+        </div>
+
+        <!-- Social + address -->
+        <div class="flex flex-wrap gap-6 justify-center text-white/70 text-sm">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-rosa-light"></i>
+            <span>Lima, Perú – Breña, Lince, La Victoria, Pueblo Libre</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fab fa-instagram text-rosa-light"></i>
+            <span>@lafamiliadelsabor</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fab fa-facebook text-rosa-light"></i>
+            <span>La Familia del Sabor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="bg-gray-900 text-gray-400 py-8">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full hero-gradient flex items-center justify-center">
+          <span class="text-white text-xs font-bold">FS</span>
+        </div>
+        <span class="text-white font-semibold">La Familia del Sabor</span>
+      </div>
+      <p>© 2024 La Familia del Sabor. Todos los derechos reservados.</p>
+      <div class="flex gap-4">
+        <a href="https://wa.me/51934587734" target="_blank" rel="noopener" class="hover:text-[#25D366] transition" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp text-lg"></i>
+        </a>
+        <a href="#" aria-label="Instagram" class="hover:text-rosa transition">
+          <i class="fab fa-instagram text-lg"></i>
+        </a>
+        <a href="#" aria-label="Facebook" class="hover:text-blue-400 transition">
+          <i class="fab fa-facebook text-lg"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       WHATSAPP FLOATING BUTTON
+  ============================================================ -->
+  <a id="whatsapp-float"
+     href="https://wa.me/51934587734?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20La%20Familia%20del%20Sabor"
+     target="_blank" rel="noopener"
+     aria-label="Contactar por WhatsApp"
+     class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
+  </a>
+
+  <!-- ============================================================
+       LIGHTBOX
+  ============================================================ -->
+  <div id="lightbox" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center hidden" role="dialog" aria-modal="true" onclick="closeLightbox(event)">
+    <div class="bg-white rounded-3xl p-10 max-w-sm w-full mx-4 text-center shadow-2xl" onclick="event.stopPropagation()">
+      <p id="lightbox-emoji" class="text-8xl mb-4"></p>
+      <h3 id="lightbox-title" class="font-display text-2xl font-bold text-gray-800 mb-4"></h3>
+      <a id="lightbox-wa" href="#" target="_blank" rel="noopener"
+         class="btn-primary inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full shadow">
+        <i class="fab fa-whatsapp"></i> Pedir este plato
+      </a>
+      <button onclick="closeLightbox()" class="block mt-4 mx-auto text-gray-400 hover:text-gray-600 text-sm transition">
+        <i class="fas fa-times mr-1"></i> Cerrar
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ── Navbar scroll ──────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // ── Mobile menu toggle ─────────────────────────────────────────
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    });
+    function closeMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+    }
+
+    // ── Menu filter ────────────────────────────────────────────────
+    function filterMenu(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isActive = btn.dataset.filter === category;
+        btn.classList.toggle('bg-morado', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('text-morado', !isActive);
+      });
+      document.querySelectorAll('.menu-item').forEach(card => {
+        const match = category === 'all' || card.dataset.category === category;
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    // ── Lightbox ───────────────────────────────────────────────────
+    function openLightbox(emoji, title) {
+      document.getElementById('lightbox-emoji').textContent = emoji;
+      document.getElementById('lightbox-title').textContent = title;
+      const msg = encodeURIComponent('Hola, quiero pedir ' + title);
+      document.getElementById('lightbox-wa').href = 'https://wa.me/51934587734?text=' + msg;
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('hidden');
+      lb.style.opacity = 0;
+      requestAnimationFrame(() => { lb.style.opacity = 1; });
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') && e.type !== 'click') return;
+      document.getElementById('lightbox').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ── Catering form → WhatsApp ───────────────────────────────────
+    function submitCatering(e) {
+      e.preventDefault();
+      const nombre   = document.getElementById('nombre').value;
+      const empresa  = document.getElementById('empresa').value;
+      const personas = document.getElementById('personas').value;
+      const fecha    = document.getElementById('fecha').value;
+      const mensaje  = document.getElementById('mensaje').value;
+      const text = `Hola, quiero cotizar un servicio de Catering:\n\n👤 Nombre: ${nombre}\n🏢 Empresa: ${empresa || 'No especificado'}\n👥 Personas: ${personas}\n📅 Fecha: ${fecha}\n💬 Detalles: ${mensaje || 'Sin detalles adicionales'}`;
+      window.open('https://wa.me/51934587734?text=' + encodeURIComponent(text), '_blank');
+    }
+
+    // ── Scroll reveal ──────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
